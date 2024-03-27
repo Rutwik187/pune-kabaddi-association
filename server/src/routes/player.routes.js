@@ -27,13 +27,12 @@ router.route("/register-player").post(
   ]),
   registerPlayer
 );
-router.route("/update-files").patch(
+router.route("/update-files/:id").patch(
   // upload.single("avatar"),
   upload.fields([
     { name: "avatar", maxCount: 1 },
-    { name: "adharCard", maxCount: 1 },
+    { name: "aadharCard", maxCount: 1 },
     { name: "birthCertificate", maxCount: 1 },
-    // { name: "achievementDocument", maxCount: 1 },
   ]),
   updateFiles
 );
@@ -43,7 +42,7 @@ router.route("/get-player/:id").get(getPlayer);
 router.route("/update-player-details/:id").patch(updatePlayerDetails);
 
 //secured routes
-router.route("/logout-player").post(verifyJWT(Player), logoutPlayer);
+router.route("/logout").post(verifyJWT(), logoutPlayer);
 router.route("/current-player").get(verifyJWT(Player), getCurrentPlayer);
 
 export default router;
